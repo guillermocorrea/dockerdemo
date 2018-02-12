@@ -3,6 +3,7 @@ jobs:
   build:
     working_directory: /temp
     docker:
+      - image: docker:17.05.0-ce-git
       - image: microsoft/aspnetcore-build
     environment:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
