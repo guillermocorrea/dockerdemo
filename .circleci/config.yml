@@ -11,3 +11,17 @@ jobs:
       - checkout
       - run: dotnet restore
       - run: dotnet build
+      - run:
+        name: Build docker image
+        command: |
+            docker build -t guillermocorrea/dockerdemo .
+      - run:
+        name: Test docker image
+        command: |
+            docker run -d -p 9200:9200 guillermocorrea/dockerdemo; sleep 10
+            curl --retry 10 --retry-delay 5 -v http://localhost:9200
+      - run:
+        name: Publish docker image
+        command: |
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+            docker push guillermocorrea/dockerdemo
