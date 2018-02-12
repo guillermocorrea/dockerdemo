@@ -12,12 +12,7 @@ jobs:
       - checkout
       - run: dotnet restore
       - run: dotnet build
-
-  deploy:
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
+      - setup_remote_docker
       - run:
           name: Build docker image
           command: |
@@ -33,11 +28,17 @@ jobs:
             docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
             docker push guillermocorrea/dockerdemo
 
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+#  deploy:
+#    docker:
+#      - image: docker:17.05.0-ce-git
+#    steps:
+#      - checkout
+
+#workflows:
+#  version: 2
+#  build-and-deploy:
+#    jobs:
+#      - build
+#      - deploy:
+#          requires:
+#            - build
