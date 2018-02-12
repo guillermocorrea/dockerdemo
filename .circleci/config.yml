@@ -12,7 +12,8 @@ jobs:
       - checkout
       - run: dotnet restore
       - run: dotnet build
-      - setup_remote_docker
+      - setup_remote_docker:
+        version: 17.05.0-ce
       - run:
           name: Build docker image
           command: |
