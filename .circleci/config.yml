@@ -29,11 +29,11 @@ jobs:
           name: Build docker image
           command: |
             docker build -t guillermocorrea/dockerdemo .
-      - run:
-          name: Test docker image
-          command: |
-            docker run -d -p 9200:80 guillermocorrea/dockerdemo; sleep 10
-            curl --retry 10 --retry-delay 5 -v http://localhost:9200
+      #- run:
+      #    name: Test docker image
+      #    command: |
+      #      docker run -d -p 9200:80 guillermocorrea/dockerdemo; sleep 10
+      #      curl --retry 10 --retry-delay 5 -v http://localhost:9200
       - run:
           name: Publish docker image
           command: |
