@@ -1,4 +1,5 @@
 version: 2
+
 jobs:
   build:
     working_directory: /temp
@@ -11,6 +12,7 @@ jobs:
       - checkout
       - run: dotnet restore
       - run: dotnet build
+
   test:
     docker:
       - image: docker:17.05.0-ce-git
@@ -29,9 +31,10 @@ jobs:
         command: |
           docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
           docker push guillermocorrea/dockerdemo
+
 workflows:
   version: 2
-    build-test-and-deploy:
+    build-and-test:
       jobs:
         - build
         - test:
